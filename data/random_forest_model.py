@@ -93,7 +93,7 @@ sns.heatmap(cm,
             cmap="Blues",
             xticklabels=["Low", "Mid", "High"],
             yticklabels=["Low", "Mid", "High"])
-plt.title("Confusion Mtrix - Random Forset")
+plt.title("Confusion Matrix - Random Forset")
 plt.xlabel("Predicted")
 plt.ylabel("Actual")
 plt.show()
