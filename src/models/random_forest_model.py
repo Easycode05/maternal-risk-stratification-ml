@@ -45,6 +45,7 @@ X_train, X_test, Y_train, Y_test = train_test_split(
 print("Training set shape:", X_train.shape)
 print("Testing set shape:", X_test.shape)
 
+
 # Verify Class distribution
 print("\nTraining Class Distribution:")
 print(Y_train.value_counts())
@@ -66,14 +67,19 @@ print("Random Forest model trained successfully")
 
 
 # Predict risk levels for the test data
-Y_pred = rf_model.predict(X_test)
-print("\nFirst 10 Predictions:")
+Y_prob = rf_model.predict_proba(X_test)
+print("First 5 Probability Predictions:")
+print(Y_prob[:5])
+Y_prob_high = Y_prob[:, 1]
+threshold = 0.35
+Y_pred = (Y_prob_high >= threshold).astype(int)
+print("First 10 Predictions:")
 print(Y_pred[:10])
 
 # Evaluate Model performance 
 from  sklearn.metrics import accuracy_score
 accuracy = accuracy_score(Y_test, Y_pred)
-print("\nModel Accuracy:", accuracy)
+print("\nModel Accuracy:", round(accuracy, 3))
 
 # Classification Report
 from sklearn.metrics import classification_report
@@ -81,7 +87,7 @@ print("\nClassification Report:\n")
 print(classification_report(Y_test, Y_pred))
 
 #confusion Matrix Visualization
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 import seaborn as sns
 import matplotlib.pyplot as plt
 
@@ -91,12 +97,14 @@ sns.heatmap(cm,
             annot=True,
             fmt="d",
             cmap="Blues",
-            xticklabels=["Low", "Mid", "High"],
-            yticklabels=["Low", "Mid", "High"])
-plt.title("Confusion Matrix - Random Forset")
+            xticklabels=["Low Risk", "High Risk"],
+            yticklabels=["Low Risk", "High Risk"])
+plt.title("Confusion Matrix - Random Forset (threshold = 0.35)")
 plt.xlabel("Predicted")
 plt.ylabel("Actual")
 plt.show()
+
+
 
 # Feature importance
 # this shows which health factors influence risk most
@@ -118,6 +126,7 @@ sns.barplot(
 )
 plt.title("Feature Importance - Random Forest")
 plt.show()
+
 
 # Save the trained model
 import os
