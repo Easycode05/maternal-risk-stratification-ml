@@ -27,7 +27,7 @@ y = df['risk']
 
 # First split: 80% train, 20% temp
 X_train, X_temp, y_train, y_temp = train_test_split(
-    X, y, test_size=0.2, random_state=42, stratify=y
+    X, y, test_size=0.4, random_state=42, stratify=y
 )
 
 # Second split: temp split into 50% validation, 50% test (10% each of total)
@@ -43,7 +43,7 @@ print(f"Test set size: {X_test.shape[0]}")
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test  = scaler.transform(X_test)
-X_val = scaler.transform(X_val)
+X_val = scaler.transform(X_val) 
 # ── 5. Train Logistic Regression ──────────────────────────────────────
 model = LogisticRegression(random_state=42, max_iter=1000)
 model.fit(X_train, y_train)
