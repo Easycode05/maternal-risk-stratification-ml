@@ -201,7 +201,7 @@ df = df.sort_values(by="abs", ascending=False)
 print("\nTop Factors Influencing Prediction:\n")
 print(df[["Features", "Impact"]].head(5))
 print("\nFactors Increasing risk:")
-print(df[df["Impact"] < 0]["Features"].head(3))
+print(df[df["Impact"] > 0]["Features"].head(3))
 print("\nFactors decreasing risk:")
 print(df[df["Impact"] < 0]["Features"].head(3))
 
