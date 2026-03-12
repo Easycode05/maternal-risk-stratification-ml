@@ -44,7 +44,7 @@ X_train_full, X_test, Y_train_full, Y_test = train_test_split(
     random_state=42,
     stratify=Y
 )
-# train + validation
+# train + validation split
 X_train, X_val, Y_train, Y_val = train_test_split(
     X_train_full,
     Y_train_full,
@@ -69,7 +69,7 @@ rf_model = RandomForestClassifier(
     n_estimators=300,       # number of trees
     class_weight="balanced",      # handles class imbalance
     random_state=42,
-    n_jobs=-1     # use all CPU cores
+    n_jobs=-1     #use all CPU cores
 )
 # Train the model
 rf_model.fit(X_train, Y_train)
@@ -110,11 +110,16 @@ sns.heatmap(cm,
             fmt="d",
             cmap="Blues",
             xticklabels=["Low Risk", "High Risk"],
-            yticklabels=["Low Risk", "High Risk"])
+            yticklabels=["Low Risk", "High Risk"]
+)
 plt.title("Confusion Matrix - Random Forset (threshold = 0.35)")
 plt.xlabel("Predicted")
 plt.ylabel("Actual")
 plt.show()
+accuracy = accuracy_score(Y_test, Y_pred)
+print(f"Overall Accuracy: {accuracy:.4f}")
+print("\nDetailed Classification Report:")
+print(classification_report(Y_test, Y_pred, target_names=["Low Risk", "High Risk"]))
 
 # Get probabilities again
 Y_prob = rf_model.predict_proba(X_test)[:,1]
@@ -132,6 +137,8 @@ plt.ylabel("True Positive Rate")
 plt.title("ROC Curve - Random Forest")
 plt.legend()
 plt.show()
+accuracy = accuracy_score(Y_test, Y_pred)
+print(f"ROC-AUC Score: {auc_score:.4f}")
 
 # Feature importance
 # this shows which health factors influence risk most
