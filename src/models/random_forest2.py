@@ -4,6 +4,8 @@
 # =============================================================================
 
 # ── Imports ───────────────────────────────────────────────────────────────────
+import matplotlib
+matplotlib.use('Agg')
 import os
 import numpy as np
 import pandas as pd
@@ -11,6 +13,9 @@ import joblib
 import shap
 import matplotlib.pyplot as plt
 import seaborn as sns
+
+FIGURES_DIR = 'reports/'
+os.makedirs(FIGURES_DIR, exist_ok=True)
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
@@ -184,7 +189,8 @@ plt.title(f"Confusion Matrix — Random Forest (threshold = {THRESHOLD})")
 plt.xlabel("Predicted")
 plt.ylabel("Actual")
 plt.tight_layout()
-plt.show()
+plt.savefig('reports/confusion_matrix.png', dpi=300, bbox_inches='tight')
+plt.close()
 
 # ── ROC-AUC ───────────────────────────────────────────────────────────────────
 fpr, tpr, _ = roc_curve(Y_test, Y_test_prob)
@@ -199,7 +205,8 @@ plt.ylabel("True Positive Rate")
 plt.title("ROC Curve — Random Forest")
 plt.legend()
 plt.tight_layout()
-plt.show()
+plt.savefig('reports/ROC_Curve.png', dpi=300, bbox_inches='tight')
+plt.close()
 
 # ── Feature Importance ────────────────────────────────────────────────────────
 importance_df = pd.DataFrame({
@@ -214,7 +221,8 @@ plt.figure(figsize=(8, 5))
 sns.barplot(x="Importance", y="Feature", data=importance_df, color="steelblue")
 plt.title("Feature Importance — Random Forest")
 plt.tight_layout()
-plt.show()
+plt.savefig('reports/feature_importance.png', dpi=300, bbox_inches='tight')
+plt.close()
 
 # =============================================================================
 # SHAP EXPLAINABILITY
@@ -223,7 +231,7 @@ plt.show()
 
 print("\n── SHAP Explainability ──")
 explainer   = shap.Explainer(rf_model, X_train_full)
-shap_values = explainer(X_test)
+shap_values = explainer(X_test, check_additivity=False)
 
 # Summary plots
 shap.summary_plot(shap_values[:, :, 1], X_test, show=True)
