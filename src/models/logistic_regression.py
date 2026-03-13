@@ -104,3 +104,8 @@ plt.legend()
 plt.tight_layout()
 plt.savefig('../../reports/figures/lr_roc_curve.png')
 plt.show()
+
+import pickle
+with open('logistic_regression.pkl', 'wb') as f:
+    pickle.dump(model, f)
+print('Model saved!')
