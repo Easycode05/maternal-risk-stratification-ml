@@ -65,18 +65,18 @@ print()
 print("Classification Report:")
 print(classification_report(y_test, y_pred, target_names=['Low Risk', 'High Risk']))
 
-# 7b. Validation Metrics
+# — 7b. Validation Metrics
 y_val_pred = model.predict(X_val)
 y_val_pred_prob = model.predict_proba(X_val)[:, 1]
 print()
-print('=' * 50)
-print('   VALIDATION SET METRICS')
-print('=' * 50)
-print(f'Accuracy  : {accuracy_score(y_val, y_val_pred):.4f}')
-print(f'Precision : {precision_score(y_val, y_val_pred):.4f}')
-print(f'Recall    : {recall_score(y_val, y_val_pred):.4f}')
-print(f'F1 Score  : {f1_score(y_val, y_val_pred):.4f}')
-print(f'ROC-AUC   : {roc_auc_score(y_val, y_val_pred_prob):.4f}')
+print("=" * 50)
+print("   VALIDATION SET METRICS")
+print("=" * 50)
+print(f"Accuracy  : {accuracy_score(y_val, y_val_pred):.4f}")
+print(f"Precision : {precision_score(y_val, y_val_pred):.4f}")
+print(f"Recall    : {recall_score(y_val, y_val_pred):.4f}")
+print(f"F1 Score  : {f1_score(y_val, y_val_pred):.4f}")
+print(f"ROC-AUC   : {roc_auc_score(y_val, y_val_pred_prob):.4f}")
 print(classification_report(y_val, y_val_pred, target_names=['Low Risk', 'High Risk']))
 
 # ── 8. Confusion Matrix ───────────────────────────────────────────────
@@ -104,8 +104,3 @@ plt.legend()
 plt.tight_layout()
 plt.savefig('../../reports/figures/lr_roc_curve.png')
 plt.show()
-
-import pickle
-with open('logistic_regression.pkl', 'wb') as f:
-    pickle.dump(model, f)
-print('Model saved!')
