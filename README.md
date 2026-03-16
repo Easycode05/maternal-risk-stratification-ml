@@ -1,74 +1,112 @@
-# Maternal Risk Stratification (ML)
+# Maternal Risk Stratification (Machine Learning)
 
-Machine Learning–based early risk stratification for resource-limited settings.
+Machine learning–based **early maternal risk stratification for resource-limited healthcare settings**.
+
+This project demonstrates how machine learning can help **identify high-risk pregnancies early** using clinical indicators, supporting better monitoring and decision-making in healthcare systems with limited resources.
 
 ---
 
 ## ✅ What this project does
-This repository contains a full (simple) pipeline to:
 
-1. **Preprocess the raw dataset** (`data/raw/maternal_dataset_csv.csv`) into a clean, model-ready CSV (`data/processed/maternal_health_clean.csv`).
-2. **Train and evaluate a Random Forest classifier** on the cleaned data.
-3. **Generate evaluation reports** (confusion matrix, ROC curve) under `reports/`.
+This repository contains a simple machine learning pipeline that:
+
+1. **Preprocesses the raw dataset** (`data/raw/maternal_dataset_csv.csv`) into a clean dataset (`data/processed/maternal_health_clean.csv`).
+2. **Trains and evaluates a Random Forest classifier** on the cleaned data.
+3. **Generates evaluation reports** such as a confusion matrix and ROC curve.
 
 ---
 
-## 🧰 Getting Started (Run the project)
+## 🧰 Getting Started
 
-### 1) Create & activate a Python environment
-From the project root (`maternal-risk-stratification-ml`):
+### 1. Create and activate a Python environment
+
+From the project root:
 
 ```bash
 python -m venv venv
 venv\Scripts\activate
 ```
 
-> 💡 On macOS/Linux use `source venv/bin/activate` instead.
+> On macOS/Linux use:
 
+```
+source venv/bin/activate
+```
 
-### 2) Install dependencies
+---
+
+### 2. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
+---
 
-### 3) Run preprocessing (generate clean dataset)
+### 3. Run preprocessing
 
 ```bash
 python src/preprocessing.py
 ```
 
-This reads `data/raw/maternal_dataset_csv.csv`, cleans it, and writes:
+This reads:
 
-- `data/processed/maternal_health_clean.csv`
+```
+data/raw/maternal_dataset_csv.csv
+```
 
+and generates:
 
-### 4) Train + evaluate the Random Forest model
+```
+data/processed/maternal_health_clean.csv
+```
+
+---
+
+### 4. Train and evaluate the model
 
 ```bash
 python src/models/random_forest2.py
 ```
 
-This script trains a Random Forest model, evaluates it on a held-out test set, and saves evaluation plots to:
+The script trains a **Random Forest model** and saves evaluation outputs in:
 
-- `reports/confusion_matrix.png`
-- `reports/ROC_Curve.png`
-
-
----
-
-## 📁 Key Files / Structure
-
-- `data/raw/` — original dataset (not modified)
-- `data/processed/` — cleaned dataset used for training
-- `src/preprocessing.py` — data cleaning + feature engineering pipeline
-- `src/models/random_forest2.py` — training + evaluation script
-- `reports/` — output plots (confusion matrix + ROC)
+```
+reports/confusion_matrix.png
+reports/ROC_Curve.png
+```
 
 ---
 
-## 📝 Notes / Tips
+## 📁 Project Structure
 
-- If you rerun `src/preprocessing.py` and `data/processed/maternal_health_clean.csv` already exists, the script will **reuse the existing cleaned data** (no need to re-run the clean step unless you want to regenerate it).
-- If you want to change the model or add a new one, start by editing or copying `src/models/random_forest2.py`.
+```
+maternal-risk-stratification-ml
+│
+├── data
+│   ├── raw
+│   └── processed
+│
+├── src
+│   ├── preprocessing.py
+│   └── models
+│       └── random_forest2.py
+│
+├── reports
+│
+├── requirements.txt
+└── README.md
+```
+
+---
+
+## 📝 Notes
+
+* If `data/processed/maternal_health_clean.csv` already exists, the preprocessing script will reuse it instead of recreating it.
+* Additional models can be added inside `src/models/`.
+
+---
+
+## ⚠️ Disclaimer
+
+This project is for **educational and research purposes** and should not be used for real clinical decision-making without proper validation.
