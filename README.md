@@ -1,100 +1,74 @@
-# Maternal Risk Stratification Using Machine Learning
+# Maternal Risk Stratification (ML)
 
-## Overview
+Machine Learning–based early risk stratification for resource-limited settings.
 
-This project focuses on predicting maternal health risk levels using machine learning techniques. The goal is to identify pregnant women who may be at low,medium, or high risk based on specific medical indicators.
+---
 
-Early detection of maternal risk can help healthcare professionals make better decisions and improve maternal healthcare outcomes.
+## ✅ What this project does
+This repository contains a full (simple) pipeline to:
 
+1. **Preprocess the raw dataset** (`data/raw/maternal_dataset_csv.csv`) into a clean, model-ready CSV (`data/processed/maternal_health_clean.csv`).
+2. **Train and evaluate a Random Forest classifier** on the cleaned data.
+3. **Generate evaluation reports** (confusion matrix, ROC curve) under `reports/`.
 
-## Dataset
+---
 
-The dataset used in this project contains several health-related features, including:
+## 🧰 Getting Started (Run the project)
 
-- Age
-- Systolic Blood Pressure
-- Diastolic Blood Pressure
-- Blood Sugar
-- Body Temperature
-- Heart Rate
+### 1) Create & activate a Python environment
+From the project root (`maternal-risk-stratification-ml`):
 
-These variables are used to predict the maternal risk level.
-
-Dataset location in the project:
-
-data/processed/maternal_health_clean.csv
-
-
-## Project Structure
-
-maternal-risk-stratification-ml/
-
-│  
-├── data/  
-│   └── Contains the dataset used for training and testing  
-
-├── notebooks/  
-│   └── Jupyter notebooks for data exploration and analysis  
-
-├── src/  
-│   └── Source code for building and training machine learning models  
-
-├── reports/  
-│   └── Generated results and project outputs  
-
-├── requirements.txt  
-│   └── List of Python libraries required for the project  
-
-└── README.md  
-    └── Project documentation  
-
-
-## Installation
-
-### 1. Clone the repository
-
-git clone https://github.com/Centjoe/maternal-risk-stratification-ml.git
-
-### 2. Navigate to the project directory
-
-cd maternal-risk-stratification-ml
-
-### 3. Create a virtual environment
-
+```bash
 python -m venv venv
-
-### 4. Activate the virtual environment
-
-For Windows:
-
 venv\Scripts\activate
+```
 
-### 5. Install required libraries
+> 💡 On macOS/Linux use `source venv/bin/activate` instead.
 
+
+### 2) Install dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
 
-## Running the Project
+### 3) Run preprocessing (generate clean dataset)
 
-After installing the dependencies, you can run the project scripts or explore the notebooks to train and evaluate the model.
+```bash
+python src/preprocessing.py
+```
 
-Example:
+This reads `data/raw/maternal_dataset_csv.csv`, cleans it, and writes:
 
-python src/models/logistic_regression.py
-
-You can also open the **notebooks folder** to explore the data and model development using Jupyter Notebook.
-
-
-## Tools and Libraries
-
-The project was built using the following tools:
-
-- Python
-- Pandas
-- Scikit-learn
-- Jupyter Notebook
+- `data/processed/maternal_health_clean.csv`
 
 
-## Author
+### 4) Train + evaluate the Random Forest model
 
-Udochukwu Joseph
+```bash
+python src/models/random_forest2.py
+```
+
+This script trains a Random Forest model, evaluates it on a held-out test set, and saves evaluation plots to:
+
+- `reports/confusion_matrix.png`
+- `reports/ROC_Curve.png`
+
+
+---
+
+## 📁 Key Files / Structure
+
+- `data/raw/` — original dataset (not modified)
+- `data/processed/` — cleaned dataset used for training
+- `src/preprocessing.py` — data cleaning + feature engineering pipeline
+- `src/models/random_forest2.py` — training + evaluation script
+- `reports/` — output plots (confusion matrix + ROC)
+
+---
+
+## 📝 Notes / Tips
+
+- If you rerun `src/preprocessing.py` and `data/processed/maternal_health_clean.csv` already exists, the script will **reuse the existing cleaned data** (no need to re-run the clean step unless you want to regenerate it).
+- If you want to change the model or add a new one, start by editing or copying `src/models/random_forest2.py`.
