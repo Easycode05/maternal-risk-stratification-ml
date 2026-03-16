@@ -145,7 +145,7 @@ print(classification_report(Y_val, Y_val_final, target_names=["Low Risk", "High 
 # Refit scaler on X_train_full, retrain model on full 80%
 
 print("PHASE 2 — Final Model (Retrain on full 80% training data)")
-print("="*60)
+
 
 # Refit scaler on full training data before final model
 final_scaler = StandardScaler()
@@ -169,10 +169,10 @@ print(f"Training data size: {X_train_full.shape[0]} rows (80% of dataset)")
 # PHASE 3 — FINAL TEST SET EVALUATION
 
 print("PHASE 3 — Final Evaluation on Held-Out Test Set (20%)")
-print("="*60)
 
 Y_test_prob = lr_model.predict_proba(X_test_scaled_final)[:, 1]
 Y_test_pred = (Y_test_prob >= THRESHOLD).astype(int)
+
 
 #Accuracy
 accuracy = accuracy_score(Y_test, Y_test_pred)
@@ -251,57 +251,6 @@ plt.tight_layout()
 plt.savefig('reports/lr_metrics/lr_coefficients.png', dpi=300, bbox_inches='tight')
 plt.close()
 print("Coefficient plot saved to reports/lr_metrics/lr_coefficients.png")
-
-
-# SHAP EXPLAINABILITY
-# Uses LinearExplainer — correct explainer for Logistic Regression
-print("\n── SHAP Explainability ──")
-explainer   = shap.LinearExplainer(lr_model, X_train_full_scaled_final)
-shap_values = explainer(X_test_scaled_final)
-
-# Summary plots
-shap.summary_plot(shap_values, X_test_scaled_final, show=True)
-shap.summary_plot(shap_values, X_test_scaled_final, max_display=10, show=True)
-
-#Low Risk Waterfall 
-low_risk_idx     = np.where(Y_test_pred == 0)[0][0]
-low_risk_patient = X_test_scaled_final.iloc[low_risk_idx:low_risk_idx + 1]
-low_prob         = lr_model.predict_proba(low_risk_patient)[0][1]
-print(f"\nLow Risk Sample — Predicted probability: {low_prob * 100:.1f}%")
-shap_values_low  = explainer(low_risk_patient)
-plt.figure()
-shap.plots.waterfall(shap_values_low[0], show=False)
-plt.tight_layout()
-plt.savefig('reports/lr_metrics/lr_waterfall_low_risk.png', dpi=300, bbox_inches='tight')
-plt.close()
-
-# ── High Risk Waterfall ───────────────────────────────────────────────────────
-high_risk_idx     = np.where(Y_test_pred == 1)[0][0]
-high_risk_patient = X_test_scaled_final.iloc[high_risk_idx:high_risk_idx + 1]
-high_prob         = lr_model.predict_proba(high_risk_patient)[0][1]
-print(f"\nHigh Risk Sample — Predicted probability: {high_prob * 100:.1f}%")
-shap_values_high  = explainer(high_risk_patient)
-plt.figure()
-shap.plots.waterfall(shap_values_low[0], show=False)
-plt.tight_layout()
-plt.savefig('reports/lr_metrics/lr_waterfall_high_risk.png', dpi=300, bbox_inches='tight')
-plt.close()
-
-# ── Top Contributing Features for High Risk Sample ───────────────────────────
-impact_df = pd.DataFrame({
-    "Feature" : X_test_scaled_final.columns,
-    "Impact"  : shap_values_high.values[0]
-})
-impact_df["abs"] = impact_df["Impact"].abs()
-impact_df = impact_df.sort_values("abs", ascending=False)
-
-print("\nTop Factors Influencing High Risk Prediction:")
-print(impact_df[["Feature", "Impact"]].head(3).to_string(index=False))
-print("\nFactors Increasing Risk:")
-print(impact_df[impact_df["Impact"] > 0]["Feature"].head(3).tolist())
-print("\nFactors Decreasing Risk:")
-print(impact_df[impact_df["Impact"] < 0]["Feature"].head(3).tolist())
-
 
 # SAVE FINAL MODEL AND SCALER
 # Both must be saved — scaler is required at inference time
