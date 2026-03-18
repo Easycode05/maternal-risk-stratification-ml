@@ -1,5 +1,5 @@
 # =============================================================================
-# Maternal Health Risk Prediction — Streamlit App
+# Materna — Maternal Health Risk Prediction App
 # Group 6 | TechCrush AI Bootcamp
 # =============================================================================
 
@@ -19,121 +19,127 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# ── Custom CSS ────────────────────────────────────────────────────────────────
+# ── CSS ───────────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
 
 :root {
-    --navy:       #0a1628;
-    --navy-mid:   #0f2044;
-    --navy-light: #1a3060;
-    --teal:       #00c9a7;
-    --teal-dim:   #00a08a;
-    --amber:      #f59e0b;
-    --crimson:    #ef4444;
-    --crimson-dim:#dc2626;
-    --text:       #e2e8f0;
-    --text-dim:   #94a3b8;
-    --card-bg:    rgba(15, 32, 68, 0.85);
-    --border:     rgba(0, 201, 167, 0.2);
+    --white:       #ffffff;
+    --bg:          #f7f9fc;
+    --bg-alt:      #eef2f7;
+    --teal:        #0891b2;
+    --teal-light:  #e0f2fe;
+    --teal-mid:    #0e7490;
+    --crimson:     #dc2626;
+    --crimson-light: #fef2f2;
+    --green:       #059669;
+    --green-light: #ecfdf5;
+    --amber:       #d97706;
+    --amber-light: #fffbeb;
+    --text:        #0f172a;
+    --text-mid:    #475569;
+    --text-dim:    #94a3b8;
+    --border:      #e2e8f0;
+    --border-mid:  #cbd5e1;
+    --shadow:      0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+    --shadow-md:   0 4px 16px rgba(0,0,0,0.1);
 }
 
 html, body, [class*="css"] {
-    font-family: 'DM Sans', sans-serif;
-    background-color: var(--navy);
+    font-family: 'IBM Plex Sans', sans-serif;
     color: var(--text);
 }
-.stApp {
-    background: linear-gradient(135deg, #0a1628 0%, #0d1f3c 50%, #091522 100%);
-    min-height: 100vh;
-}
+.stApp { background: var(--bg); }
 #MainMenu, footer, header { visibility: hidden; }
-.block-container { padding: 2rem 3rem 3rem 3rem; max-width: 1400px; }
+.block-container { padding: 1.5rem 2.5rem 3rem 2.5rem; max-width: 1300px; }
 
 /* ── Header ── */
 .app-header {
-    text-align: center;
-    padding: 2.5rem 0 1.5rem 0;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 2rem;
+    background: var(--white);
+    border-bottom: 2px solid var(--teal);
+    padding: 1.75rem 2.5rem;
+    margin: -1.5rem -2.5rem 2rem -2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
-.app-header h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 3rem;
-    color: #ffffff;
+.header-left h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--text);
     margin: 0;
-    letter-spacing: -1px;
+    letter-spacing: -0.5px;
 }
-.app-header h1 span { color: var(--teal); }
-.app-header .tagline {
-    font-size: 1rem;
-    color: var(--text-dim);
-    margin: 0.4rem 0 0 0;
+.header-left h1 span { color: var(--teal); }
+.header-left p {
+    font-size: 0.85rem;
+    color: var(--text-mid);
+    margin: 0.2rem 0 0 0;
     font-weight: 300;
-    font-style: italic;
-    letter-spacing: 0.3px;
 }
-.app-header .description {
-    font-size: 0.88rem;
-    color: #64748b;
-    margin: 0.6rem auto 0 auto;
-    max-width: 600px;
+.header-right {
+    text-align: right;
+    font-size: 0.75rem;
+    color: var(--text-dim);
     line-height: 1.6;
 }
 .header-badge {
     display: inline-block;
-    background: rgba(0,201,167,0.1);
-    border: 1px solid var(--border);
-    color: var(--teal);
+    background: var(--teal-light);
+    color: var(--teal-mid);
     font-size: 0.72rem;
-    padding: 0.25rem 0.75rem;
+    padding: 0.2rem 0.7rem;
     border-radius: 20px;
-    margin-top: 0.75rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-weight: 500;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 /* ── Section Labels ── */
 .section-label {
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--teal);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.6rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--teal-light);
 }
 
 /* ── Cards ── */
 .card {
-    background: var(--card-bg);
+    background: var(--white);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 12px;
     padding: 1.5rem;
-    margin-bottom: 1.25rem;
-    backdrop-filter: blur(10px);
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow);
 }
 
 /* ── Result Cards ── */
 .result-card {
-    border-radius: 16px;
+    background: var(--white);
+    border-radius: 12px;
     padding: 1.75rem;
     text-align: center;
-    position: relative;
-    overflow: hidden;
+    box-shadow: var(--shadow-md);
     margin-bottom: 1rem;
 }
 .result-card.high-risk {
-    background: linear-gradient(135deg, rgba(239,68,68,0.15) 0%, rgba(220,38,38,0.05) 100%);
-    border: 1px solid rgba(239,68,68,0.4);
+    border-top: 4px solid var(--crimson);
+    border-left: 1px solid #fecaca;
+    border-right: 1px solid #fecaca;
+    border-bottom: 1px solid #fecaca;
 }
 .result-card.low-risk {
-    background: linear-gradient(135deg, rgba(0,201,167,0.15) 0%, rgba(0,160,138,0.05) 100%);
-    border: 1px solid rgba(0,201,167,0.4);
+    border-top: 4px solid var(--green);
+    border-left: 1px solid #a7f3d0;
+    border-right: 1px solid #a7f3d0;
+    border-bottom: 1px solid #a7f3d0;
 }
 .result-model-name {
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -141,120 +147,202 @@ html, body, [class*="css"] {
     margin-bottom: 0.5rem;
 }
 .result-label {
-    font-family: 'DM Serif Display', serif;
-    font-size: 2rem;
-    font-weight: 400;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem;
     margin: 0.25rem 0;
 }
 .result-label.high { color: var(--crimson); }
-.result-label.low  { color: var(--teal); }
+.result-label.low  { color: var(--green); }
 .result-prob {
-    font-size: 3rem;
+    font-size: 3.2rem;
     font-weight: 600;
     line-height: 1;
     margin: 0.5rem 0;
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 .result-prob.high { color: var(--crimson); }
-.result-prob.low  { color: var(--teal); }
-.result-sub { font-size: 0.8rem; color: var(--text-dim); margin-top: 0.25rem; }
+.result-prob.low  { color: var(--green); }
+.result-sub { font-size: 0.78rem; color: var(--text-dim); margin-top: 0.2rem; }
+
+/* ── Progress Bar ── */
 .prob-bar-container {
-    background: rgba(255,255,255,0.08);
+    background: var(--bg-alt);
     border-radius: 8px; height: 8px;
     margin: 1rem 0 0.5rem 0; overflow: hidden;
 }
 .prob-bar-fill { height: 100%; border-radius: 8px; }
-.prob-bar-fill.high { background: linear-gradient(90deg, #dc2626, #ef4444); }
-.prob-bar-fill.low  { background: linear-gradient(90deg, #00a08a, #00c9a7); }
+.prob-bar-fill.high { background: linear-gradient(90deg, #b91c1c, #dc2626); }
+.prob-bar-fill.low  { background: linear-gradient(90deg, #047857, #059669); }
 
-/* ── Clinical Action Banner ── */
+/* ── Clinical Action ── */
 .action-banner {
-    border-radius: 12px;
+    border-radius: 10px;
     padding: 1rem 1.25rem;
     margin-top: 0.75rem;
-    font-size: 0.88rem;
-    line-height: 1.6;
+    font-size: 0.85rem;
+    line-height: 1.7;
 }
 .action-banner.high {
-    background: rgba(239,68,68,0.1);
-    border: 1px solid rgba(239,68,68,0.35);
-    color: #fca5a5;
+    background: var(--crimson-light);
+    border: 1px solid #fecaca;
+    color: #991b1b;
 }
 .action-banner.low {
-    background: rgba(0,201,167,0.08);
-    border: 1px solid rgba(0,201,167,0.3);
-    color: #6ee7b7;
+    background: var(--green-light);
+    border: 1px solid #a7f3d0;
+    color: #065f46;
 }
 .action-banner strong {
-    font-weight: 600; display: block; margin-bottom: 0.35rem;
-    font-size: 0.82rem; letter-spacing: 1px; text-transform: uppercase;
+    display: block; margin-bottom: 0.35rem;
+    font-size: 0.78rem; letter-spacing: 1px;
+    text-transform: uppercase; font-weight: 700;
 }
 .action-steps { margin: 0; padding-left: 1.1rem; }
 .action-steps li { margin-bottom: 0.2rem; }
 
 /* ── Contributors ── */
+.contrib-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin-top: 1rem;
+    box-shadow: var(--shadow);
+}
+.contrib-title {
+    font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--text-mid); margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+}
 .contributor-item {
     display: flex; align-items: center;
     justify-content: space-between;
-    padding: 0.6rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--bg-alt);
 }
 .contributor-item:last-child { border-bottom: none; }
-.contributor-rank { font-size: 0.7rem; font-weight: 700; color: var(--teal); width: 1.5rem; }
-.contributor-name { font-size: 0.88rem; color: var(--text); flex: 1; padding: 0 0.75rem; text-transform: capitalize; }
-.contributor-bar-wrap { width: 100px; background: rgba(255,255,255,0.08); border-radius: 4px; height: 6px; overflow: hidden; }
+.contributor-rank {
+    font-size: 0.68rem; font-weight: 700;
+    color: var(--teal); width: 1.5rem;
+}
+.contributor-name {
+    font-size: 0.85rem; color: var(--text);
+    flex: 1; padding: 0 0.75rem;
+}
+.contributor-bar-wrap {
+    width: 90px; background: var(--bg-alt);
+    border-radius: 4px; height: 5px; overflow: hidden;
+}
 .contributor-bar-fill { height: 100%; border-radius: 4px; }
-.contributor-direction { font-size: 0.72rem; padding: 0.15rem 0.5rem; border-radius: 10px; margin-left: 0.5rem; font-weight: 600; }
-.dir-up   { background: rgba(239,68,68,0.15);  color: #f87171; }
-.dir-down { background: rgba(0,201,167,0.15);  color: #34d399; }
+.contributor-direction {
+    font-size: 0.7rem; padding: 0.15rem 0.5rem;
+    border-radius: 8px; margin-left: 0.5rem; font-weight: 600;
+}
+.dir-up   { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+.dir-down { background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; }
+
+/* ── BMI Display ── */
+.bmi-display {
+    background: var(--teal-light);
+    border: 1px solid #bae6fd;
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.82rem;
+    color: var(--teal-mid);
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+}
+
+/* ── Consensus Banner ── */
+.consensus-banner {
+    border-radius: 10px;
+    padding: 0.9rem 1.25rem;
+    text-align: center;
+    margin-top: 0.75rem;
+    font-size: 0.88rem;
+}
+.consensus-banner.agree {
+    background: var(--green-light);
+    border: 1px solid #a7f3d0;
+    color: #065f46;
+}
+.consensus-banner.disagree {
+    background: var(--amber-light);
+    border: 1px solid #fde68a;
+    color: #92400e;
+}
 
 /* ── Disclaimer ── */
 .disclaimer {
-    background: rgba(245,158,11,0.08);
-    border: 1px solid rgba(245,158,11,0.25);
-    border-radius: 12px;
-    padding: 1rem 1.25rem;
+    background: var(--amber-light);
+    border: 1px solid #fde68a;
+    border-radius: 10px;
+    padding: 0.9rem 1.25rem;
     margin-top: 1.5rem;
-    font-size: 0.8rem;
-    color: #fbbf24;
+    font-size: 0.78rem;
+    color: #78350f;
     line-height: 1.6;
 }
 
 /* ── Sidebar ── */
 section[data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #0a1628 0%, #0d1f3c 100%);
+    background: var(--white);
     border-right: 1px solid var(--border);
 }
-section[data-testid="stSidebar"] label,
-section[data-testid="stSidebar"] p { color: var(--text-dim) !important; font-size: 0.85rem !important; }
+section[data-testid="stSidebar"] label { color: var(--text-mid) !important; font-size: 0.83rem !important; }
 
 /* ── Button ── */
 .stButton > button {
-    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dim) 100%) !important;
-    color: #0a1628 !important; font-weight: 700 !important;
-    font-size: 1rem !important; border: none !important;
-    border-radius: 12px !important; padding: 0.75rem 2rem !important;
-    width: 100% !important; letter-spacing: 0.5px !important;
-    font-family: 'DM Sans', sans-serif !important;
+    background: var(--teal) !important;
+    color: white !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 0.65rem 1.5rem !important;
+    width: 100% !important;
+    font-family: 'IBM Plex Sans', sans-serif !important;
+    letter-spacing: 0.3px !important;
+    transition: background 0.2s ease !important;
 }
-.stButton > button:hover { box-shadow: 0 8px 25px rgba(0,201,167,0.3) !important; }
+.stButton > button:hover { background: var(--teal-mid) !important; }
 
-.teal-divider {
-    height: 2px; background: linear-gradient(90deg, var(--teal), transparent);
-    border: none; margin: 1.25rem 0; border-radius: 2px;
+.divider {
+    height: 1px; background: var(--border);
+    border: none; margin: 1rem 0;
 }
+
+/* ── Landing feature cards ── */
+.feature-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem 1.5rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    height: 100%;
+}
+.feature-icon { font-size: 2.2rem; margin-bottom: 0.75rem; }
+.feature-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem; color: var(--text);
+    margin-bottom: 0.5rem;
+}
+.feature-desc { font-size: 0.82rem; color: var(--text-mid); line-height: 1.6; }
 
 @keyframes pulse-border {
-    0%   { box-shadow: 0 0 0 0 rgba(239,68,68,0.4); }
-    70%  { box-shadow: 0 0 0 10px rgba(239,68,68,0); }
-    100% { box-shadow: 0 0 0 0 rgba(239,68,68,0); }
+    0%   { box-shadow: 0 0 0 0 rgba(220,38,38,0.3); }
+    70%  { box-shadow: 0 0 0 8px rgba(220,38,38,0); }
+    100% { box-shadow: 0 0 0 0 rgba(220,38,38,0); }
 }
 .pulse { animation: pulse-border 2s infinite; }
 </style>
 """, unsafe_allow_html=True)
 
 
-# ── Load Models & Scaler ──────────────────────────────────────────────────────
-@st.cache_resource
+# ── Load Models — cached so they load once only ───────────────────────────────
+@st.cache_resource(show_spinner="Loading models...")
 def load_artifacts():
     rf_model  = joblib.load("saved_models/random_forest_model.pkl")
     lr_model  = joblib.load("saved_models/logistic_regression_model.pkl")
@@ -269,54 +357,6 @@ except Exception as e:
     load_error = str(e)
 
 
-# ── Clinical Action Logic ─────────────────────────────────────────────────────
-def get_clinical_action(label):
-    if label == "High Risk":
-        return {
-            "class": "high",
-            "title": "🚨 Immediate Clinical Action Required",
-            "steps": [
-                "Refer patient to specialist or higher-level facility immediately",
-                "Escalate to obstetric emergency team if applicable",
-                "Document findings and notify supervising clinician",
-            ]
-        }
-    else:
-        return {
-            "class": "low",
-            "title": "✅ Routine Antenatal Care Recommended",
-            "steps": [
-                "Continue standard antenatal care schedule",
-                "Reinforce nutrition, iron & folic acid adherence",
-                "Schedule next routine follow-up visit",
-                "Reassess at next visit or if symptoms change",
-            ]
-        }
-
-
-# ── SHAP Contributors ─────────────────────────────────────────────────────────
-def get_top_contributors(model, input_df, scaler=None, model_type="rf", n=3):
-    try:
-        if model_type == "lr":
-            input_scaled = pd.DataFrame(scaler.transform(input_df), columns=input_df.columns)
-            explainer    = shap.LinearExplainer(model, input_scaled)
-            shap_values  = explainer(input_scaled)
-            vals         = shap_values.values[0]
-        else:
-            explainer    = shap.Explainer(model, input_df)
-            shap_values  = explainer(input_df, check_additivity=False)
-            vals         = shap_values.values[0, :, 1]
-
-        contrib_df = pd.DataFrame({
-            "Feature": input_df.columns,
-            "Impact" : vals,
-            "Abs"    : np.abs(vals)
-        }).sort_values("Abs", ascending=False).head(n)
-        return contrib_df
-    except Exception:
-        return None
-
-
 # ── Predict ───────────────────────────────────────────────────────────────────
 def predict(model, input_df, scaler=None, model_type="rf", threshold=0.35):
     if model_type == "lr":
@@ -326,6 +366,67 @@ def predict(model, input_df, scaler=None, model_type="rf", threshold=0.35):
         prob = model.predict_proba(input_df)[0][1]
     label = "High Risk" if prob >= threshold else "Low Risk"
     return prob, label
+
+
+# ── SHAP — cached per input to avoid recomputing ─────────────────────────────
+@st.cache_data(show_spinner=False)
+def get_top_contributors_rf(_model, input_tuple, n=3):
+    input_df = pd.DataFrame([input_tuple], columns=_model.feature_names_in_)
+    try:
+        explainer   = shap.TreeExplainer(_model)
+        shap_values = explainer.shap_values(input_df)
+        # shap_values[1] = class 1 (High Risk)
+        vals = shap_values[1][0] if isinstance(shap_values, list) else shap_values[0, :, 1]
+        contrib_df = pd.DataFrame({
+            "Feature": input_df.columns,
+            "Impact" : vals,
+            "Abs"    : np.abs(vals)
+        }).dropna(subset=["Impact"]).sort_values("Abs", ascending=False).head(n)
+        return contrib_df
+    except Exception:
+        return None
+
+@st.cache_data(show_spinner=False)
+def get_top_contributors_lr(_model, _scaler, input_tuple, feature_names, n=3):
+    input_df     = pd.DataFrame([input_tuple], columns=feature_names)
+    input_scaled = pd.DataFrame(_scaler.transform(input_df), columns=feature_names)
+    try:
+        explainer   = shap.LinearExplainer(_model, input_scaled)
+        shap_values = explainer(input_scaled)
+        vals        = shap_values.values[0]
+        contrib_df  = pd.DataFrame({
+            "Feature": feature_names,
+            "Impact" : vals,
+            "Abs"    : np.abs(vals)
+        }).dropna(subset=["Impact"]).sort_values("Abs", ascending=False).head(n)
+        return contrib_df
+    except Exception:
+        return None
+
+
+# ── Clinical Action ───────────────────────────────────────────────────────────
+def get_clinical_action(label):
+    if label == "High Risk":
+        return {
+            "class": "high",
+            "title": "🚨 Immediate Clinical Action Required",
+            "steps": [
+                "Refer patient to specialist or higher-level facility immediately",
+                "Escalate to obstetric emergency team if applicable",
+                "Initiate close monitoring — vitals every 30 minutes",
+                "Document findings and notify supervising clinician",
+            ]
+        }
+    return {
+        "class": "low",
+        "title": "✅ Routine Antenatal Care Recommended",
+        "steps": [
+            "Continue standard antenatal care schedule",
+            "Reinforce nutrition, iron & folic acid adherence",
+            "Schedule next routine follow-up visit",
+            "Reassess at next visit or if symptoms change",
+        ]
+    }
 
 
 # ── Render Result ─────────────────────────────────────────────────────────────
@@ -340,7 +441,7 @@ def render_result(model_name, prob, label, contributors):
     <div class="result-card {risk_class} {pulse_class}">
         <div class="result-model-name">{model_name}</div>
         <div class="result-label {label_class}">{icon} {label}</div>
-        <div class="result-prob {label_class}">{bar_pct}<span style="font-size:1.2rem">%</span></div>
+        <div class="result-prob {label_class}">{bar_pct}<span style="font-size:1.1rem; font-weight:400">%</span></div>
         <div class="result-sub">Probability of High Risk</div>
         <div class="prob-bar-container">
             <div class="prob-bar-fill {label_class}" style="width:{bar_pct}%"></div>
@@ -357,28 +458,27 @@ def render_result(model_name, prob, label, contributors):
     </div>
     """, unsafe_allow_html=True)
 
-    if contributors is not None:
+    if contributors is not None and not contributors.empty:
+        max_abs = contributors["Abs"].max()
+    
         st.markdown("""
-        <div class="card" style="margin-top:1rem;">
-            <div style="font-family:'DM Serif Display',serif; font-size:1rem; color:#fff; margin-bottom:1rem;">
-                🔬 Top 3 Risk Contributors
-            </div>
+        <div class="contrib-card">
+        <div class="contrib-title">🔬 Top Risk Contributors</div>
         """, unsafe_allow_html=True)
 
-        max_abs = contributors["Abs"].max()
         for i, row in enumerate(contributors.itertuples(), 1):
-            direction  = "↑ Increases Risk" if row.Impact > 0 else "↓ Decreases Risk"
-            dir_class  = "dir-up" if row.Impact > 0 else "dir-down"
-            bar_width  = int((row.Abs / max_abs) * 100)
-            bar_color  = "#ef4444" if row.Impact > 0 else "#00c9a7"
-            feat_label = row.Feature.replace("_", " ").title()
+            direction = "↑ Increases Risk" if row.Impact > 0 else "↓ Decreases Risk"
+            dir_class = "dir-up" if row.Impact > 0 else "dir-down"
+            bar_w     = int((row.Abs / max_abs) * 100) if max_abs > 0 else 0
+            bar_color = "#dc2626" if row.Impact > 0 else "#059669"
+            feat_lbl  = row.Feature.replace("_", " ").title()
 
             st.markdown(f"""
             <div class="contributor-item">
                 <span class="contributor-rank">#{i}</span>
-                <span class="contributor-name">{feat_label}</span>
+                <span class="contributor-name">{feat_lbl}</span>
                 <div class="contributor-bar-wrap">
-                    <div class="contributor-bar-fill" style="width:{bar_width}%;background:{bar_color}"></div>
+                    <div class="contributor-bar-fill" style="width:{bar_w}%;background:{bar_color}"></div>
                 </div>
                 <span class="contributor-direction {dir_class}">{direction}</span>
             </div>
@@ -391,15 +491,17 @@ def render_result(model_name, prob, label, contributors):
 # LAYOUT
 # ══════════════════════════════════════════════════════════════════════════════
 
+# ── Header ────────────────────────────────────────────────────────────────────
 st.markdown("""
 <div class="app-header">
-    <h1>Materna<span>.</span></h1>
-    <div class="tagline">Intelligent Maternal Risk Stratification</div>
-    <div class="description">
-        An ML-powered clinical decision support tool for early identification of high-risk pregnancies
-        in resource-limited settings — built on indigenous Tanzanian maternal health data.
+    <div class="header-left">
+        <h1>Materna<span>.</span></h1>
+        <p>Intelligent Maternal Health Risk Stratification · Tanzania Clinical Dataset</p>
     </div>
-    <span class="header-badge">🩺 TechCrush AI Bootcamp · Group 6</span>
+    <div class="header-right">
+        <span class="header-badge">🩺 TechCrush AI Bootcamp · Group 6</span><br>
+        <span style="font-size:0.72rem;">ML-powered clinical decision support</span>
+    </div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -410,11 +512,11 @@ if not models_loaded:
 # ── Sidebar ───────────────────────────────────────────────────────────────────
 with st.sidebar:
     st.markdown("""
-    <div style="text-align:center; padding:1rem 0 1.5rem 0;">
-        <div style="font-family:'DM Serif Display',serif; font-size:1.4rem; color:#fff;">
-            Patient <span style="color:#00c9a7;">Input</span>
+    <div style="padding:1rem 0 1.25rem 0;">
+        <div style="font-family:'Playfair Display',serif; font-size:1.3rem; color:#0f172a;">
+            Patient Input
         </div>
-        <div style="font-size:0.75rem; color:#64748b; margin-top:0.25rem; letter-spacing:1px; text-transform:uppercase;">
+        <div style="font-size:0.75rem; color:#94a3b8; margin-top:0.2rem; letter-spacing:1px; text-transform:uppercase;">
             Enter Clinical Parameters
         </div>
     </div>
@@ -426,36 +528,29 @@ with st.sidebar:
         index=0, label_visibility="collapsed"
     )
 
-    st.markdown('<hr class="teal-divider">', unsafe_allow_html=True)
+    st.markdown('<hr class="divider">', unsafe_allow_html=True)
     st.markdown('<div class="section-label">Continuous Variables</div>', unsafe_allow_html=True)
 
-    age             = st.number_input("Age (Years)",                     min_value=10,  max_value=99,   value=25,   step=1)
-    systolic_bp     = st.number_input("Systolic Blood Pressure (mmHg)",  min_value=50,  max_value=300,  value=120,  step=1)
-    diastolic_bp    = st.number_input("Diastolic Blood Pressure (mmHg)", min_value=30,  max_value=250,  value=80,   step=1)
-    pulse_rate      = st.number_input("Pulse Rate (beats/min)",          min_value=30,  max_value=200,  value=80,   step=1)
-    haemoglobin     = st.number_input("Haemoglobin Level (g/dL)",        min_value=3.0, max_value=30.0, value=11.5, step=0.1, format="%.1f")
-    gestational_age = st.number_input("Gestational Age (Weeks)",         min_value=1,   max_value=42,   value=20,   step=1)
+    age             = st.number_input("Age (Years)",                     min_value=1,   max_value=99,   value=25,   step=1)
+    systolic_bp     = st.number_input("Systolic Blood Pressure (mmHg)",  min_value=50,  max_value=250,  value=120,  step=1)
+    diastolic_bp    = st.number_input("Diastolic Blood Pressure (mmHg)", min_value=30,  max_value=150,  value=80,   step=1)
+    pulse_rate      = st.number_input("Pulse Rate (beats/min)",          min_value=30,  max_value=220,  value=80,   step=1)
+    haemoglobin     = st.number_input("Haemoglobin Level (g/dL)",        min_value=1.0, max_value=25.0, value=11.5, step=0.1, format="%.1f")
+    gestational_age = st.number_input("Gestational Age (Weeks)",         min_value=1,   max_value=45,   value=20,   step=1)
 
-    st.markdown('<div class="section-label" style="margin-top:0.75rem;">Height & Weight</div>', unsafe_allow_html=True)
-    height_cm = st.number_input("Height (cm)", min_value=100.0, max_value=220.0, value=160.0, step=0.5, format="%.1f")
-    weight_kg = st.number_input("Weight (kg)", min_value=30.0,  max_value=200.0, value=65.0,  step=0.5, format="%.1f")
+    st.markdown('<div class="section-label" style="margin-top:0.5rem;">Height & Weight</div>', unsafe_allow_html=True)
+    height_cm = st.number_input("Height (cm)", min_value=50.0,  max_value=250.0, value=160.0, step=0.5, format="%.1f")
+    weight_kg = st.number_input("Weight (kg)", min_value=20.0,  max_value=300.0, value=65.0,  step=0.5, format="%.1f")
     bmi = round(weight_kg / ((height_cm / 100) ** 2), 1)
-    st.markdown(f"""
-    <div style="background:rgba(0,201,167,0.08); border:1px solid rgba(0,201,167,0.2);
-                border-radius:8px; padding:0.5rem 0.75rem; font-size:0.82rem;
-                color:#00c9a7; margin-bottom:0.5rem;">
-        Calculated BMI: <strong>{bmi} kg/m²</strong>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown(f'<div class="bmi-display">Calculated BMI: <strong>{bmi} kg/m²</strong></div>', unsafe_allow_html=True)
 
-    st.markdown('<hr class="teal-divider">', unsafe_allow_html=True)
+    st.markdown('<hr class="divider">', unsafe_allow_html=True)
     st.markdown('<div class="section-label">Categorical Variables</div>', unsafe_allow_html=True)
 
-    miscarriage_history = st.selectbox("Previous Miscarriage",         ["No (0)", "Yes (1)"])
-    malaria_rdt         = st.selectbox("Malaria Rapid Test (RDT)",     ["Negative (0)", "Positive (1)"])
-    iron_folic_acid     = st.selectbox("Iron & Folic Acid Supplement", ["No (0)", "Yes (1)"])
-    alcohol_use         = st.selectbox("Alcohol Use",                  ["No (0)", "Yes (1)"])
-    hiv_status          = st.selectbox("HIV Status",                   ["Negative (0)", "Positive (1)"])
+    miscarriage_history = st.selectbox("Previous Miscarriage",       ["No (0)", "Yes (1)"])
+    malaria_rdt         = st.selectbox("Malaria Rapid Test (RDT)",   ["Negative (0)", "Positive (1)"])
+    alcohol_use         = st.selectbox("Alcohol Use",                ["No (0)", "Yes (1)"])
+    hiv_status          = st.selectbox("HIV Status",                 ["Negative (0)", "Positive (1)"])
 
     st.markdown("<br>", unsafe_allow_html=True)
     predict_btn = st.button("🔍 Generate Prediction", use_container_width=True)
@@ -475,85 +570,74 @@ input_data = {
     "bmi"                : bmi,
     "miscarriage_history": parse_binary(miscarriage_history),
     "malaria_rdt"        : parse_binary(malaria_rdt),
-    "iron_folic_acid"    : parse_binary(iron_folic_acid),
     "alcohol_use"        : parse_binary(alcohol_use),
     "hiv_status"         : parse_binary(hiv_status),
 }
 
-input_df = pd.DataFrame([input_data])[rf_model.feature_names_in_.tolist()]
+feature_names = rf_model.feature_names_in_.tolist()
+input_df      = pd.DataFrame([input_data])[feature_names]
+input_tuple   = tuple(input_data[f] for f in feature_names)
 
 # ── Main Content ──────────────────────────────────────────────────────────────
 if not predict_btn:
     col1, col2, col3 = st.columns(3)
-    with col1:
-        st.markdown("""
-        <div class="card" style="text-align:center; padding:2rem;">
-            <div style="font-size:2.5rem; margin-bottom:0.75rem;">🤖</div>
-            <div style="font-family:'DM Serif Display',serif; font-size:1.1rem; color:#fff; margin-bottom:0.5rem;">Dual Model Engine</div>
-            <div style="font-size:0.82rem; color:#94a3b8; line-height:1.6;">Random Forest & Logistic Regression working in tandem for robust, cross-validated risk assessment</div>
-        </div>
-        """, unsafe_allow_html=True)
-    with col2:
-        st.markdown("""
-        <div class="card" style="text-align:center; padding:2rem;">
-            <div style="font-size:2.5rem; margin-bottom:0.75rem;">🧬</div>
-            <div style="font-family:'DM Serif Display',serif; font-size:1.1rem; color:#fff; margin-bottom:0.5rem;">SHAP Explainability</div>
-            <div style="font-size:0.82rem; color:#94a3b8; line-height:1.6;">Every prediction is backed by the top 3 clinical factors driving the risk classification</div>
-        </div>
-        """, unsafe_allow_html=True)
-    with col3:
-        st.markdown("""
-        <div class="card" style="text-align:center; padding:2rem;">
-            <div style="font-size:2.5rem; margin-bottom:0.75rem;">🏥</div>
-            <div style="font-family:'DM Serif Display',serif; font-size:1.1rem; color:#fff; margin-bottom:0.5rem;">Actionable Guidance</div>
-            <div style="font-size:0.82rem; color:#94a3b8; line-height:1.6;">High-risk predictions immediately trigger referral and escalation recommendations for clinicians</div>
-        </div>
-        """, unsafe_allow_html=True)
+    cards = [
+        ("🤖", "Dual Model Engine",     "Random Forest & Logistic Regression working in tandem for robust, cross-validated risk assessment."),
+        ("🧬", "SHAP Explainability",   "Every prediction is backed by the top 3 clinical factors driving the risk classification."),
+        ("🏥", "Actionable Guidance",   "High-risk predictions immediately trigger referral and escalation recommendations for clinicians."),
+    ]
+    for col, (icon, title, desc) in zip([col1, col2, col3], cards):
+        with col:
+            st.markdown(f"""
+            <div class="feature-card">
+                <div class="feature-icon">{icon}</div>
+                <div class="feature-title">{title}</div>
+                <div class="feature-desc">{desc}</div>
+            </div>
+            """, unsafe_allow_html=True)
 
     st.markdown("""
-    <div style="text-align:center; padding:3rem 0;">
-        <div style="font-size:3rem; margin-bottom:1rem;">🩺</div>
-        <div style="font-family:'DM Serif Display',serif; font-size:1.4rem; color:#64748b;">
-            Enter patient parameters in the sidebar and click <span style="color:#00c9a7;">Generate Prediction</span>
+    <div style="text-align:center; padding:3rem 0 1rem 0;">
+        <div style="font-size:2.5rem; margin-bottom:0.75rem;">🩺</div>
+        <div style="font-family:'Playfair Display',serif; font-size:1.35rem; color:#64748b;">
+            Enter patient parameters in the sidebar and click
+            <span style="color:#0891b2;">Generate Prediction</span>
+        </div>
+        <div style="font-size:0.82rem; color:#94a3b8; margin-top:0.5rem;">
+            Trained on 8,509 Tanzanian maternal health records · AUC-ROC 0.944 (RF)
         </div>
     </div>
     """, unsafe_allow_html=True)
 
 else:
-    st.markdown('<div class="section-label" style="margin-bottom:1.25rem;">Prediction Results</div>', unsafe_allow_html=True)
-
     THRESHOLD = 0.35
+    st.markdown('<div class="section-label" style="margin-bottom:1.25rem;">Prediction Results</div>', unsafe_allow_html=True)
 
     if model_choice == "Both Models":
         col1, col2 = st.columns(2)
+
         with col1:
             rf_prob, rf_label = predict(rf_model, input_df, model_type="rf", threshold=THRESHOLD)
-            rf_contrib        = get_top_contributors(rf_model, input_df, model_type="rf")
+            rf_contrib        = get_top_contributors_rf(rf_model, input_tuple)
             render_result("Random Forest", rf_prob, rf_label, rf_contrib)
+
         with col2:
             lr_prob, lr_label = predict(lr_model, input_df, scaler=lr_scaler, model_type="lr", threshold=THRESHOLD)
-            lr_contrib        = get_top_contributors(lr_model, input_df, scaler=lr_scaler, model_type="lr")
+            lr_contrib        = get_top_contributors_lr(lr_model, lr_scaler, input_tuple, feature_names)
             render_result("Logistic Regression", lr_prob, lr_label, lr_contrib)
 
         if rf_label == lr_label:
             st.markdown(f"""
-            <div style="background:rgba(0,201,167,0.08); border:1px solid rgba(0,201,167,0.3);
-                        border-radius:12px; padding:1rem 1.5rem; text-align:center; margin-top:0.5rem;">
-                <span style="color:#00c9a7; font-weight:600;">✓ Model Consensus</span>
-                <span style="color:#94a3b8; font-size:0.88rem; margin-left:0.5rem;">
-                    Both models agree — patient is <strong style="color:#e2e8f0;">{rf_label}</strong>
-                </span>
+            <div class="consensus-banner agree">
+                <strong>✓ Model Consensus</strong> — Both models agree:
+                patient is <strong>{rf_label}</strong>
             </div>
             """, unsafe_allow_html=True)
         else:
             st.markdown(f"""
-            <div style="background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.3);
-                        border-radius:12px; padding:1rem 1.5rem; text-align:center; margin-top:0.5rem;">
-                <span style="color:#f59e0b; font-weight:600;">⚡ Model Disagreement</span>
-                <span style="color:#94a3b8; font-size:0.88rem; margin-left:0.5rem;">
-                    RF predicts <strong style="color:#e2e8f0;">{rf_label}</strong> ·
-                    LR predicts <strong style="color:#e2e8f0;">{lr_label}</strong> — defer to clinical judgement
-                </span>
+            <div class="consensus-banner disagree">
+                <strong>⚡ Model Disagreement</strong> — RF predicts <strong>{rf_label}</strong> ·
+                LR predicts <strong>{lr_label}</strong> — defer to clinical judgement
             </div>
             """, unsafe_allow_html=True)
 
@@ -561,17 +645,17 @@ else:
         col1, _ = st.columns([1, 1])
         with col1:
             rf_prob, rf_label = predict(rf_model, input_df, model_type="rf", threshold=THRESHOLD)
-            rf_contrib        = get_top_contributors(rf_model, input_df, model_type="rf")
+            rf_contrib        = get_top_contributors_rf(rf_model, input_tuple)
             render_result("Random Forest", rf_prob, rf_label, rf_contrib)
 
     else:
         col1, _ = st.columns([1, 1])
         with col1:
             lr_prob, lr_label = predict(lr_model, input_df, scaler=lr_scaler, model_type="lr", threshold=THRESHOLD)
-            lr_contrib        = get_top_contributors(lr_model, input_df, scaler=lr_scaler, model_type="lr")
+            lr_contrib        = get_top_contributors_lr(lr_model, lr_scaler, input_tuple, feature_names)
             render_result("Logistic Regression", lr_prob, lr_label, lr_contrib)
 
-    # Patient summary
+    # ── Patient Summary ────────────────────────────────────────────────────────
     with st.expander("📋 View Patient Input Summary", expanded=False):
         display_labels = {
             "age"                : "Age (Years)",
@@ -583,22 +667,21 @@ else:
             "bmi"                : f"BMI (kg/m²) — from {height_cm}cm / {weight_kg}kg",
             "miscarriage_history": "Previous Miscarriage",
             "malaria_rdt"        : "Malaria Rapid Test (RDT)",
-            "iron_folic_acid"    : "Iron & Folic Acid Supplement",
             "alcohol_use"        : "Alcohol Use",
             "hiv_status"         : "HIV Status",
         }
-        c1, c2  = st.columns(2)
-        items   = list(input_data.items())
-        half    = len(items) // 2
+        c1, c2 = st.columns(2)
+        items  = list(input_data.items())
+        half   = len(items) // 2
         for col, chunk in [(c1, items[:half]), (c2, items[half:])]:
             with col:
                 for k, v in chunk:
                     lbl = display_labels.get(k, k.replace("_", " ").title())
                     st.markdown(f"""
                     <div style="display:flex; justify-content:space-between; padding:0.4rem 0;
-                                border-bottom:1px solid rgba(255,255,255,0.05); font-size:0.85rem;">
-                        <span style="color:#94a3b8;">{lbl}</span>
-                        <span style="color:#e2e8f0; font-weight:500;">{v}</span>
+                                border-bottom:1px solid #f1f5f9; font-size:0.84rem;">
+                        <span style="color:#64748b;">{lbl}</span>
+                        <span style="color:#0f172a; font-weight:500;">{v}</span>
                     </div>
                     """, unsafe_allow_html=True)
 
