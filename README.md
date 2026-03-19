@@ -1,8 +1,8 @@
-# Maternal Risk Stratification (Machine Learning)
+# Machine Learning-Based Early Maternal Risk Stratification for Resource-Limited Settings (Using Tanzania as a Case Study)
 
-Machine learning–based **early maternal risk stratification for resource-limited healthcare settings**.
+Machine learning–based **early maternal risk stratification for resource-limited healthcare settings**, using Tanzania as a case study.
 
-This project demonstrates how machine learning can help **identify high-risk pregnancies early** using clinical indicators, supporting better monitoring and decision-making in healthcare systems with limited resources.
+This project demonstrates how machine learning can help **identify high-risk pregnancies early** using clinical indicators, supporting better monitoring and decision-making in healthcare systems with limited resources, with a focus on the Tanzanian healthcare context.
 
 ---
 
