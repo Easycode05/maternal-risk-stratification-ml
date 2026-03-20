@@ -20,19 +20,11 @@ This repository contains a simple machine learning pipeline that:
 
 ## 🧰 Getting Started
 
-### 1. Create and activate a Python environment
-
-From the project root:
+### 1. Clone the repository
 
 ```bash
-python -m venv venv
-venv\Scripts\activate
-```
-
-> On macOS/Linux use:
-
-```
-source venv/bin/activate
+git clone https://github.com/Easycode05/maternal-risk-stratification-ml.git
+cd maternal-risk-stratification-ml
 ```
 
 ---
@@ -77,12 +69,12 @@ python src/models/random_forest2.py
 python src/models/logistic_regression2.py
 ```
 
-Evaluation outputs are saved in:
+---
 
-```
-reports/rf_metrics/
-reports/lr_metrics/
-```
+### 5. Output
+
+- Trained models are saved to `saved_models/`
+- Figures are saved to `reports/`
 
 ---
 
