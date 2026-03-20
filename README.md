@@ -65,17 +65,23 @@ data/processed/maternal_health_clean.csv
 
 ---
 
-### 4. Train and evaluate the model
+### 4. Train and evaluate the models
 
+**Random Forest (Primary Model):**
 ```bash
 python src/models/random_forest2.py
 ```
 
-The script trains a **Random Forest model** and saves evaluation outputs in:
+**Logistic Regression (Baseline Model):**
+```bash
+python src/models/logistic_regression2.py
+```
+
+Evaluation outputs are saved in:
 
 ```
-reports/confusion_matrix.png
-reports/ROC_Curve.png
+reports/rf_metrics/
+reports/lr_metrics/
 ```
 
 ---
@@ -87,15 +93,29 @@ maternal-risk-stratification-ml
 │
 ├── data
 │   ├── raw
+│   │   └── maternal_dataset_csv.csv
 │   └── processed
+│       └── maternal_health_clean.csv
 │
 ├── src
 │   ├── preprocessing.py
 │   └── models
-│       └── random_forest2.py
+│       ├── random_forest2.py
+│       └── logistic_regression2.py
 │
 ├── reports
+│   ├── rf_metrics
+│   └── lr_metrics
 │
+├── saved_models
+│   ├── random_forest_model.pkl
+│   ├── logistic_regression_model.pkl
+│   └── lr_scaler.pkl
+│
+├── deployment
+│   └── mhrs_app0.py
+│
+├── notebooks
 ├── requirements.txt
 └── README.md
 ```
