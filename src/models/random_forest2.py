@@ -235,6 +235,8 @@ low_prob         = rf_model.predict_proba(low_risk_patient)[0][1]
 print(f"\nLow Risk Sample — Predicted probability: {low_prob * 100:.1f}%")
 shap_values_low  = explainer(low_risk_patient)
 shap.plots.waterfall(shap_values_low[0, :, 1])
+plt.savefig('reports/low_risk_waterfall.png', dpi=300, bbox_inches='tight')
+plt.close()
 
 #High Risk Waterfall
 high_risk_idx     = np.where(Y_test_pred == 1)[0][0]
@@ -243,6 +245,9 @@ high_prob         = rf_model.predict_proba(high_risk_patient)[0][1]
 print(f"\nHigh Risk Sample — Predicted probability: {high_prob * 100:.1f}%")
 shap_values_high  = explainer(high_risk_patient)
 shap.plots.waterfall(shap_values_high[0, :, 1])
+plt.savefig('reports/high_risk_waterfall.png', dpi=300, bbox_inches='tight')
+plt.close()
+
 
 #Top Contributing Features for High Risk Sample
 impact_df = pd.DataFrame({
