@@ -1,8 +1,10 @@
 # Machine Learning-Based Early Maternal Risk Stratification for Resource-Limited Settings (Using Tanzania as a Case Study)
 
-Machine learning–based **early maternal risk stratification for resource-limited healthcare settings**, using Tanzania as a case study.
+## 🌍 Overview
 
-This project demonstrates how machine learning can help **identify high-risk pregnancies early** using clinical indicators, supporting better monitoring and decision-making in healthcare systems with limited resources, with a focus on the Tanzanian healthcare context.
+Maternal mortality remains a critical public health challenge in sub-Saharan Africa, particularly in resource-constrained clinical settings where timely risk identification is difficult. This project develops and validates a machine learning pipeline to stratify maternal health risk at the point of care using routine clinical indicators.
+
+We compare a **Random Forest classifier** (primary model) against a **Logistic Regression baseline**, evaluated on an indigenous Tanzanian clinical dataset. The pipeline is designed for deployment in low-resource environments where interpretability and recall for high-risk cases are paramount.
 
 ---
 
@@ -107,20 +109,38 @@ maternal-risk-stratification-ml
 
 ---
 
+## 📊 Dataset
+
+| Attribute | Detail |
+|---|---|
+| Source | Zenodo — University of Dodoma & Muhimbili National Hospital |
+| Collection | 5 districts, Tanzania |
+| Records | 8,817 |
+| Features | 11 clinical indicators |
+| Target | Binary — risk (0 = Low Risk, 1 = High Risk) |
+| Split | 60% Train / 20% Validation / 20% Test (Stratified, random_state=42) |
+
+---
+
 ## 📊 Dataset Features
 
-The model uses the following clinical indicators as input features:
+The model uses the following 11 clinical indicators as input features:
 
 | Feature | Description |
 |---|---|
-| Age | Age of the patient in years |
-| SystolicBP | Upper blood pressure value (mmHg) |
-| DiastolicBP | Lower blood pressure value (mmHg) |
-| BS | Blood glucose level (mmol/L) |
-| BodyTemp | Body temperature (°F) |
-| HeartRate | Resting heart rate (bpm) |
+| age | Age of the patient in years |
+| pulse_rate | Resting pulse rate (bpm) |
+| haemoglobin | Haemoglobin level (g/dL) |
+| gestational_age | Gestational age (weeks) |
+| systolic_bp | Upper blood pressure value (mmHg) |
+| diastolic_bp | Lower blood pressure value (mmHg) |
+| bmi | Body Mass Index (kg/m²) |
+| malaria_rdt | Malaria rapid diagnostic test result (0/1) |
+| miscarriage_history | History of miscarriage (0/1) |
+| alcohol_use | Alcohol use (0/1) |
+| hiv_status | HIV status (0/1) |
 
-Target label: `RiskLevel` — `low risk`, `mid risk`, or `high risk`.
+Target label: `risk` — Binary (0 = Low Risk, 1 = High Risk).
 
 ---
 
