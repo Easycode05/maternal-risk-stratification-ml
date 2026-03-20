@@ -14,16 +14,7 @@ df = pd.read_csv(data_path)
 # STEP 2: DATA INTEGRITY & TARGET AUDIT
 # ==========================================
 
-# 1. Missingness Check
-# We create a visual "map" of empty spots. 
-missing_data = df.isnull()
-fig_missing = px.imshow(missing_data, 
-                        labels=dict(x="Health Indicators", y="Patient Record", color="Is Missing?"),
-                        title="Data Health Map: Checking for Missing Information",
-                        color_continuous_scale='Viridis')
-fig_missing.write_image("missing_data.png")
-
-# 2. Risk Distribution (Target Balance)
+# 1. Risk Distribution (Target Balance)
 # We count how many "High Risk" (1) vs "Low Risk" (0) cases we have.
 # This helps us know if our future AI will see enough examples of both.
 risk_counts = df['risk'].value_counts().reset_index()
