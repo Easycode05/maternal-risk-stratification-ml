@@ -107,6 +107,32 @@ maternal-risk-stratification-ml
 
 ---
 
+## 📊 Dataset Features
+
+The model uses the following clinical indicators as input features:
+
+| Feature | Description |
+|---|---|
+| Age | Age of the patient in years |
+| SystolicBP | Upper blood pressure value (mmHg) |
+| DiastolicBP | Lower blood pressure value (mmHg) |
+| BS | Blood glucose level (mmol/L) |
+| BodyTemp | Body temperature (°F) |
+| HeartRate | Resting heart rate (bpm) |
+
+Target label: `RiskLevel` — `low risk`, `mid risk`, or `high risk`.
+
+---
+
+## 🤝 Contributing
+
+1. Pull the latest `development` branch: `git pull origin development`
+2. Create a new branch: `git checkout -b feature/your-feature-name`
+3. Make your changes, commit, and push
+4. Open a Pull Request targeting `development` — **not** `main`
+
+---
+
 ## ⚠️ Disclaimer
 
 This project is for **educational and research purposes** and should not be used for real clinical decision-making without proper validation.
