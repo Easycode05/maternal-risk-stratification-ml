@@ -144,6 +144,23 @@ Target label: `risk` — Binary (0 = Low Risk, 1 = High Risk).
 
 ---
 
+## 📈 Results Summary
+
+| Metric | Random Forest | Logistic Regression |
+|---|---|---|
+| Model Role | Primary Model | Baseline Model |
+| AUC-ROC | 0.994 | 0.914 |
+| Accuracy | 87.1% | 83.0% |
+| Recall (High Risk) | 90.5% | 90.4% |
+| Precision (High Risk) | 89.1% | 83.4% |
+| F1-Score (High Risk) | 89.8% | 86.8% |
+| Specificity (Low Risk Recall) | ~90% | 69.8% |
+| Classification Threshold | 0.35 | 0.35 |
+
+> The Random Forest model outperforms the Logistic Regression baseline across all key metrics, achieving a near-perfect AUC-ROC of 0.994 while maintaining high recall for high-risk cases — critical for clinical deployment in resource-limited settings.
+
+---
+
 ## 🤝 Contributing
 
 1. Pull the latest `development` branch: `git pull origin development`
