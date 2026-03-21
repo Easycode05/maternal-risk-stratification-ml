@@ -2,7 +2,7 @@
 # Materna — Maternal Health Risk Prediction App
 # Group 6 | TechCrush AI Bootcamp
 # =============================================================================
-
+import os
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -11,6 +11,8 @@ import shap
 import matplotlib
 matplotlib.use('Agg')
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODELS_DIR = os.path.normpath(os.path.join(BASE_DIR, "..", "saved_models"))
 # ── Page Config ───────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="Materna | Maternal Health Risk Predictor",
@@ -344,9 +346,9 @@ section[data-testid="stSidebar"] label { color: var(--text-mid) !important; font
 # ── Load Models — cached so they load once only ───────────────────────────────
 @st.cache_resource(show_spinner="Loading models...")
 def load_artifacts():
-    rf_model  = joblib.load("saved_models/random_forest_model.pkl")
-    lr_model  = joblib.load("saved_models/logistic_regression_model.pkl")
-    lr_scaler = joblib.load("saved_models/lr_scaler.pkl")
+    rf_model  = joblib.load(os.path.join(MODELS_DIR, "random_forest_model.pkl"))
+    lr_model  = joblib.load(os.path.join(MODELS_DIR, "logistic_regression_model.pkl"))
+    lr_scaler = joblib.load(os.path.join(MODELS_DIR, "lr_scaler.pkl"))
     return rf_model, lr_model, lr_scaler
 
 try:
