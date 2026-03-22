@@ -99,8 +99,7 @@ maternal-risk-stratification-ml
 │
 ├── reports
 │   ├── rf_metrics
-│   ├── lr_metrics
-│   └── eda_images
+│   └── lr_metrics
 │
 ├── saved_models
 │   ├── random_forest_model.pkl
@@ -108,13 +107,8 @@ maternal-risk-stratification-ml
 │   └── lr_scaler.pkl
 │
 ├── deployment
-│   ├── mhrs_app0.py
-│   ├── mhrs_app1.py
-│   └── mhrs_app2.py
+│   └── mhrs_app0.py
 │
-├── notebooks
-│   ├── eda_analysis_4.ipynb
-│   └── eda_analysis_4.py
 ├── requirements.txt
 └── README.md
 ```
