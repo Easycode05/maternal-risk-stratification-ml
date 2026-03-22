@@ -14,7 +14,7 @@ This repository contains a simple machine learning pipeline that:
 
 1. **Preprocesses the raw dataset** (`data/raw/maternal_dataset_csv.csv`) into a clean dataset (`data/processed/maternal_health_clean.csv`).
 2. **Trains and evaluates a Random Forest classifier** (primary model) and a **Logistic Regression baseline** on the cleaned data.
-3. **Generates evaluation reports** such as confusion matrices, ROC curves, feature importance and odds ratios.
+3. **Generates evaluation reports** such as confusion matrices, ROC curves, feature importance, and odds ratios.
 
 ---
 
@@ -135,7 +135,7 @@ maternal-risk-stratification-ml
 
 ---
 
-## 📊 Dataset Features
+## 📊 Dataset Information
 
 The model uses the following 11 clinical indicators as input features:
 
