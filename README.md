@@ -175,15 +175,6 @@ Target label: `risk` — Binary (0 = Low Risk, 1 = High Risk).
 
 ---
 
-## 🤝 Contributing
-
-1. Pull the latest `development` branch: `git pull origin development`
-2. Create a new branch: `git checkout -b feature/your-feature-name`
-3. Make your changes, commit, and push
-4. Open a Pull Request targeting `development` — **not** `main`
-
----
-
 ## ⚠️ Disclaimer
 
 This project is for **educational and research purposes** and should not be used for real clinical decision-making without proper validation.
