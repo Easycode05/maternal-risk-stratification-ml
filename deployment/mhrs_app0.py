@@ -1,7 +1,5 @@
-# =============================================================================
 # Materna — Maternal Health Risk Prediction App
 # Group 6 | TechCrush AI Bootcamp
-# =============================================================================
 import os
 import streamlit as st
 import pandas as pd
@@ -11,9 +9,8 @@ import shap
 import matplotlib
 matplotlib.use('Agg')
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODELS_DIR = os.path.normpath(os.path.join(BASE_DIR, "..", "saved_models"))
-# ── Page Config ───────────────────────────────────────────────────────────────
+
+#Page Config 
 st.set_page_config(
     page_title="Materna | Maternal Health Risk Predictor",
     page_icon="🩺",
@@ -21,7 +18,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# ── CSS ───────────────────────────────────────────────────────────────────────
+#CSS
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
@@ -346,6 +343,8 @@ section[data-testid="stSidebar"] label { color: var(--text-mid) !important; font
 # ── Load Models — cached so they load once only ───────────────────────────────
 @st.cache_resource(show_spinner="Loading models...")
 def load_artifacts():
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    MODELS_DIR = os.path.normpath(os.path.join(BASE_DIR, "..", "saved_models"))
     rf_model  = joblib.load(os.path.join(MODELS_DIR, "random_forest_model.pkl"))
     lr_model  = joblib.load(os.path.join(MODELS_DIR, "logistic_regression_model.pkl"))
     lr_scaler = joblib.load(os.path.join(MODELS_DIR, "lr_scaler.pkl"))
