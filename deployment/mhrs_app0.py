@@ -343,6 +343,7 @@ section[data-testid="stSidebar"] label { color: var(--text-mid) !important; font
 # ── Load Models — cached so they load once only ───────────────────────────────
 @st.cache_resource(show_spinner="Loading models...")
 def load_artifacts():
+    import os
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     MODELS_DIR = os.path.normpath(os.path.join(BASE_DIR, "..", "saved_models"))
     rf_model  = joblib.load(os.path.join(MODELS_DIR, "random_forest_model.pkl"))
