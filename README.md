@@ -99,7 +99,16 @@ maternal-risk-stratification-ml
 │
 ├── reports
 │   ├── rf_metrics
-│   └── lr_metrics
+│   ├── lr_metrics
+│   └── eda_images
+│       ├── age_distribution.png
+│       ├── bmi_distribution.png
+│       ├── diastolic_bp_distribution.png
+│       ├── gestational_age_distribution.png
+│       ├── haemoglobin_distribution.png
+│       ├── pulse_rate_distribution.png
+│       ├── risk_distribution.png
+│       └── systolic_bp_distribution.png
 │
 ├── saved_models
 │   ├── random_forest_model.pkl
@@ -107,7 +116,14 @@ maternal-risk-stratification-ml
 │   └── lr_scaler.pkl
 │
 ├── deployment
-│   └── mhrs_app0.py
+│   ├── mhrs_app0.py
+│   ├── mhrs_app1.py
+│   └── mhrs_app2.py
+│
+├── notebooks
+│   ├── eda_analysis_4.ipynb
+│   ├── eda_analysis_4.py
+│   └── requirements.txt
 │
 ├── requirements.txt
 └── README.md
