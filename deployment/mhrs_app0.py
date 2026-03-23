@@ -4,9 +4,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
-import shap
-import matplotlib
-matplotlib.use('Agg')
+
 
 
 #Page Config 
@@ -371,6 +369,7 @@ def predict(model, input_df, scaler=None, model_type="rf", threshold=0.35):
 # ── SHAP — cached per input to avoid recomputing ─────────────────────────────
 @st.cache_data(show_spinner=False)
 def get_top_contributors_rf(_model, input_tuple, n=3):
+    import shap
     input_df = pd.DataFrame([input_tuple], columns=_model.feature_names_in_)
     try:
         explainer   = shap.TreeExplainer(_model)
@@ -388,6 +387,7 @@ def get_top_contributors_rf(_model, input_tuple, n=3):
 
 @st.cache_data(show_spinner=False)
 def get_top_contributors_lr(_model, _scaler, input_tuple, feature_names, n=3):
+    import shap
     input_df     = pd.DataFrame([input_tuple], columns=feature_names)
     input_scaled = pd.DataFrame(_scaler.transform(input_df), columns=feature_names)
     try:
