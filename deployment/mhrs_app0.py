@@ -1,6 +1,5 @@
 # Materna — Maternal Health Risk Prediction App
 # Group 6 | TechCrush AI Bootcamp
-import os
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -350,7 +349,6 @@ def load_artifacts():
     lr_model  = joblib.load(os.path.join(MODELS_DIR, "logistic_regression_model.pkl"))
     lr_scaler = joblib.load(os.path.join(MODELS_DIR, "lr_scaler.pkl"))
     return rf_model, lr_model, lr_scaler
-
 try:
     rf_model, lr_model, lr_scaler = load_artifacts()
     models_loaded = True
