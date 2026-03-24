@@ -47,7 +47,14 @@ html, body, [class*="css"] {
     color: var(--text);
 }
 .stApp { background: var(--bg); }
-#MainMenu, footer, header { visibility: hidden; }
+#MainMenu { visibility: hidden; }
+footer { visibility: hidden; }
+header { visibility: hidden; }
+
+[data-testid="collapsedControl"] {
+    visibility: visible !important;
+    display: flex !important;
+}
 .block-container { padding: 1.5rem 2.5rem 3rem 2.5rem; max-width: 1300px; }
 
 /* ── Header ── */
