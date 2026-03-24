@@ -39,10 +39,7 @@ st.markdown("""
     --border:      #e2e8f0;
     --border-mid:  #cbd5e1;
     --shadow:      0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
-    --shadow-md:   0 4px 16px rgba(0,0,0,0.1);
-}
-
-html, body, [class*="css"] {
+  html, body, [class*="css"] {
     font-family: 'IBM Plex Sans', sans-serif;
     color: var(--text);
 }
@@ -52,9 +49,16 @@ footer { visibility: hidden; }
 header { visibility: hidden; }
 
 [data-testid="collapsedControl"] {
-    visibility: visible !important;
-    display: flex !important;
+    display: none !important;
 }
+
+section[data-testid="stSidebar"] {
+    transform: none !important;
+    min-width: 300px !important;
+    width: 300px !important;
+    position: relative !important;
+}
+
 .block-container { padding: 1.5rem 2.5rem 3rem 2.5rem; max-width: 1300px; }
 
 /* ── Header ── */
@@ -96,7 +100,8 @@ header { visibility: hidden; }
     border-radius: 20px;
     font-weight: 600;
     letter-spacing: 0.5px;
-}
+}  --shadow-md:   0 4px 16px rgba(0,0,0,0.1);
+
 
 /* ── Section Labels ── */
 .section-label {
