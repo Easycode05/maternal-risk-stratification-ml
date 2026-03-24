@@ -53,10 +53,12 @@ header { visibility: hidden; }
 }
 
 section[data-testid="stSidebar"] {
-    transform: none !important;
-    min-width: 300px !important;
+    min-width: 280px !important;
+    max-width: 500px !important;
     width: 300px !important;
     position: relative !important;
+    resize: horizontal !important;
+    overflow: auto !important;
 }
 
 .block-container { padding: 1.5rem 2.5rem 3rem 2.5rem; max-width: 1300px; }
