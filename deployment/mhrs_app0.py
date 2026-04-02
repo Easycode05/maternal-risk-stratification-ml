@@ -349,7 +349,7 @@ section[data-testid="stSidebar"] label { color: var(--text-mid) !important; font
 """, unsafe_allow_html=True)
 
 
-# ── Load Models — cached so they load once only ───────────────────────────────
+#Load Models — cached so they load once only
 @st.cache_resource(show_spinner="Loading models...")
 def load_artifacts():
     import os
@@ -367,7 +367,7 @@ except Exception as e:
     load_error = str(e)
 
 
-# ── Predict ───────────────────────────────────────────────────────────────────
+#Predict 
 def predict(model, input_df, scaler=None, model_type="rf", threshold=0.35):
     if model_type == "lr":
         input_scaled = pd.DataFrame(scaler.transform(input_df), columns=input_df.columns)
@@ -378,7 +378,7 @@ def predict(model, input_df, scaler=None, model_type="rf", threshold=0.35):
     return prob, label
 
 
-# ── SHAP — cached per input to avoid recomputing ─────────────────────────────
+#SHAP — cached per input to avoid recomputing
 @st.cache_data(show_spinner=False)
 def get_top_contributors_rf(_model, input_tuple, n=3):
     import shap
@@ -416,7 +416,7 @@ def get_top_contributors_lr(_model, _scaler, input_tuple, feature_names, n=3):
         return None
 
 
-# ── Clinical Action ───────────────────────────────────────────────────────────
+#Clinical Action
 def get_clinical_action(label):
     if label == "High Risk":
         return {
@@ -441,7 +441,7 @@ def get_clinical_action(label):
     }
 
 
-# ── Render Result ─────────────────────────────────────────────────────────────
+#Render Result
 def render_result(model_name, prob, label, contributors):
     risk_class  = "high-risk" if label == "High Risk" else "low-risk"
     label_class = "high"      if label == "High Risk" else "low"
@@ -499,11 +499,8 @@ def render_result(model_name, prob, label, contributors):
         st.markdown("</div>", unsafe_allow_html=True)
 
 
-# ══════════════════════════════════════════════════════════════════════════════
-# LAYOUT
-# ══════════════════════════════════════════════════════════════════════════════
 
-# ── Header ────────────────────────────────────────────────────────────────────
+#Header
 st.markdown("""
 <div class="app-header">
     <div class="header-left">
@@ -521,7 +518,7 @@ if not models_loaded:
     st.error(f"⚠️ Could not load model files. Ensure `saved_models/` exists.\n\nError: {load_error}")
     st.stop()
 
-# ── Sidebar ───────────────────────────────────────────────────────────────────
+#Sidebar
 with st.sidebar:
     st.markdown("""
     <div style="padding:1rem 0 1.25rem 0;">
@@ -568,7 +565,7 @@ with st.sidebar:
     predict_btn = st.button("🔍 Generate Prediction", use_container_width=True)
 
 
-# ── Parse & Build Input ───────────────────────────────────────────────────────
+#Parse & Build Input
 def parse_binary(val):
     return int(val.split("(")[1].replace(")", ""))
 
@@ -590,7 +587,7 @@ feature_names = rf_model.feature_names_in_.tolist()
 input_df      = pd.DataFrame([input_data])[feature_names]
 input_tuple   = tuple(input_data[f] for f in feature_names)
 
-# ── Main Content ──────────────────────────────────────────────────────────────
+#Main Content
 if not predict_btn:
     col1, col2, col3 = st.columns(3)
     cards = [
@@ -667,7 +664,7 @@ else:
             lr_contrib        = get_top_contributors_lr(lr_model, lr_scaler, input_tuple, feature_names)
             render_result("Logistic Regression", lr_prob, lr_label, lr_contrib)
 
-    # ── Patient Summary ────────────────────────────────────────────────────────
+    #Patient Summary
     with st.expander("📋 View Patient Input Summary", expanded=False):
         display_labels = {
             "age"                : "Age (Years)",
